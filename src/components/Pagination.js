@@ -53,16 +53,19 @@ const Pagination = ({ data, setNumberOfDataToSkip, numberOfDataToSkip }) => {
                 }
             </div >
             {arrayOfPages.map((page, index) => {
-                if (page > pagesMinPerPageLimit && page < pagesMaxPerPageLimit + 1) {
-                    return (<div className="page" key={index}>
+
+                return (
+                    page > pagesMinPerPageLimit && page < pagesMaxPerPageLimit + 1 &&
+                    <div className="page" key={index}>
                         <span onClick={() => {
                             setNumberOfDataToSkip((index * 100));
                             setCurrentPage(page)
                         }} className={currentPage === page ? "pageActive" : null}>
                             {page}
                         </span>
-                    </div>)
-                }
+                    </div>
+                )
+
             })}
             {currentPage < arrayOfPages[arrayOfPages.length - 1] &&
                 <div className='page-box-right'>
