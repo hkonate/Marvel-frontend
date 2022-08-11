@@ -17,7 +17,7 @@ const Pagination = ({ data, setNumberOfDataToSkip, numberOfDataToSkip }) => {
                 {currentPage !== arrayOfPages[0] &&
 
                     <>
-                        <span onClick={() => {
+                        <a href='#logo' onClick={() => {
                             setNumberOfDataToSkip(numberOfDataToSkip - 100)
                             if (currentPage - 1 === pagesMinPerPageLimit) {
                                 setMinPagesPerPageLimit(pagesMinPerPageLimit - pagesPerPage)
@@ -25,26 +25,26 @@ const Pagination = ({ data, setNumberOfDataToSkip, numberOfDataToSkip }) => {
                             }
                             setCurrentPage(currentPage - 1)
                         }}>&#60;
-                        </span>
+                        </a>
                         {
                             pagesMinPerPageLimit >= pagesPerPage &&
                             <>
-                                <span className='pagination-left' onClick={() => {
+                                <a href='#logo' className='pagination-left' onClick={() => {
                                     setCurrentPage(arrayOfPages[0])
                                     setNumberOfDataToSkip(arrayOfPages[0] - 1)
                                     setMaxPagesPerPageLimit(pagesPerPage)
                                     setMinPagesPerPageLimit(arrayOfPages[0] - 1)
 
-                                }}>{arrayOfPages[0]}</span>
+                                }}>{arrayOfPages[0]}</a>
 
-                                <span onClick={() => {
+                                <a href='#logo' onClick={() => {
 
                                     if ((currentPage - 50) >= arrayOfPages[0]) {
                                         setCurrentPage(currentPage - 50)
                                         setMaxPagesPerPageLimit(pagesMaxPerPageLimit - pagesPerPage * 10)
                                         setMinPagesPerPageLimit(pagesMinPerPageLimit - pagesPerPage * 10)
                                     }
-                                }}>...</span>
+                                }}>...</a>
                             </>
                         }
 
@@ -57,12 +57,12 @@ const Pagination = ({ data, setNumberOfDataToSkip, numberOfDataToSkip }) => {
                 return (
                     page > pagesMinPerPageLimit && page < pagesMaxPerPageLimit + 1 &&
                     <div className="page" key={index}>
-                        <span onClick={() => {
+                        <a href='#logo' onClick={() => {
                             setNumberOfDataToSkip((index * 100));
                             setCurrentPage(page)
                         }} className={currentPage === page ? "pageActive" : null}>
                             {page}
-                        </span>
+                        </a>
                     </div>
                 )
 
@@ -71,31 +71,31 @@ const Pagination = ({ data, setNumberOfDataToSkip, numberOfDataToSkip }) => {
                 <div className='page-box-right'>
                     {pagesMaxPerPageLimit !== arrayOfPages[arrayOfPages.length - 1] &&
                         <>
-                            <span className='ellipsis-right' onClick={() => {
+                            <a href='#logo' className='ellipsis-right' onClick={() => {
 
                                 if ((currentPage + 50) <= arrayOfPages[arrayOfPages.length - 1]) {
                                     setCurrentPage(currentPage + 50)
                                     setMaxPagesPerPageLimit(pagesMaxPerPageLimit + pagesPerPage * 10)
                                     setMinPagesPerPageLimit(pagesMinPerPageLimit + pagesPerPage * 10)
                                 }
-                            }}>...</span>
-                            <span onClick={() => {
+                            }}>...</a>
+                            <a href='#logo' onClick={() => {
                                 setCurrentPage(arrayOfPages[arrayOfPages.length - 1])
                                 setNumberOfDataToSkip(arrayOfPages.length - 1)
                                 setMaxPagesPerPageLimit(arrayOfPages[arrayOfPages.length - 1])
                                 setMinPagesPerPageLimit(arrayOfPages[arrayOfPages.length - 1] - pagesPerPage)
                                 setNumberOfDataToSkip(data.count - 100)
-                            }}>{arrayOfPages[arrayOfPages.length - 1]}</span>
+                            }}>{arrayOfPages[arrayOfPages.length - 1]}</a>
                         </>
                     }
-                    <span onClick={() => {
+                    <a href='#logo' onClick={() => {
                         setNumberOfDataToSkip(numberOfDataToSkip + 100)
                         if (currentPage + 1 > pagesMaxPerPageLimit) {
                             setMaxPagesPerPageLimit(pagesMaxPerPageLimit + pagesPerPage)
                             setMinPagesPerPageLimit(pagesMinPerPageLimit + pagesPerPage)
                         }
                         setCurrentPage(currentPage + 1)
-                    }} >&#62;</span>
+                    }} >&#62;</a>
                 </div>}
 
         </div >

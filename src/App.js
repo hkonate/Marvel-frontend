@@ -18,30 +18,30 @@ function App() {
   const [comicsData, setComicsData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState("")
+  const [autoComplete, setAutoComplete] = useState([])
+  const [notFavoris, setNotFavoris] = useState(false)
   const [favorisData, setFavorisData] = useState([])
-  console.log(search);
+  const [display, setDisplay] = useState(false)
+
   useEffect(() => {
-    try {
-      const fecthData = async () => {
-        const response = await axios.get(`https://app-marvel-reacteur.herokuapp.com/characters?skip=${numberOfDataToSkip}`)
-        if (response.data) {
-          setData(response.data)
-          setIsLoading(false)
-        }
+    const fecthData = async () => {
+      const response = await axios.get(`https://app-marvel-react.herokuapp.com/characters?skip=${numberOfDataToSkip}`)
+      if (response.data) {
+        setData(response.data)
+        setAutoComplete(response.data)
+        setIsLoading(false)
       }
-      fecthData();
-    } catch (error) {
-      console.log(error.response.data);
     }
+    fecthData();
   }, [numberOfDataToSkip])
   return (
     isLoading ? <div className='back'><div className='ring'><span></span></div> <span className='load'>loading</span></div> :
       <Router>
-        <Header setSearch={setSearch} search={search} />
+        <Header setSearch={setSearch} search={search} autoComplete={autoComplete} notFavoris={notFavoris} display={display} setDisplay={setDisplay} />
         <Routes>
-          <Route path='/' element={<Personnages data={data} numberOfDataToSkip={numberOfDataToSkip} setNumberOfDataToSkip={setNumberOfDataToSkip} search={search} favorisData={favorisData} setFavorisData={setFavorisData} />} />
-          <Route path='/comics' element={<Comics search={search} comicsData={comicsData} setComicsData={setComicsData} numberOfDataToSkip={numberOfDataToSkip} setNumberOfDataToSkip={setNumberOfDataToSkip} favorisData={favorisData} setFavorisData={setFavorisData} />} />
-          <Route path='/favoris' element={<Favoris favorisData={favorisData} setFavorisData={setFavorisData} data={data} comicsData={comicsData} />} />
+          <Route path='/' element={<Personnages setNotFavoris={setNotFavoris} data={data} numberOfDataToSkip={numberOfDataToSkip} setNumberOfDataToSkip={setNumberOfDataToSkip} search={search} favorisData={favorisData} setFavorisData={setFavorisData} />} />
+          <Route path='/comics' element={<Comics search={search} comicsData={comicsData} setComicsData={setComicsData} numberOfDataToSkip={numberOfDataToSkip} setNumberOfDataToSkip={setNumberOfDataToSkip} favorisData={favorisData} setFavorisData={setFavorisData} setAutoComplete={setAutoComplete} setNotFavoris={setNotFavoris} />} />
+          <Route path='/favoris' element={<Favoris favorisData={favorisData} setFavorisData={setFavorisData} data={data} comicsData={comicsData} setAutoComplete={setAutoComplete} setNotFavoris={setNotFavoris} setDisplay={setDisplay} />} />
         </Routes>
       </Router>
   );

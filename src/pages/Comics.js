@@ -6,18 +6,20 @@ import Main from '../components/Main';
 import Pagination from '../components/Pagination';
 
 
-const Comics = ({ search, comicsData, setComicsData, favorisData, setFavorisData }) => {
+const Comics = ({ search, comicsData, setComicsData, favorisData, setFavorisData, setAutoComplete, setNotFavoris }) => {
     const [isLoading, setIsLoading] = useState(true)
     const [numberOfDataToSkip, setNumberOfDataToSkip] = useState(0)
     const titleOrName = "title"
+    setNotFavoris(true)
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`https://app-marvel-reacteur.herokuapp.com/comics?skip=${numberOfDataToSkip}`);
+            const response = await axios.get(`https://app-marvel-react.herokuapp.com/comics?skip=${numberOfDataToSkip}`);
             setComicsData(response.data);
             setIsLoading(false)
+            setAutoComplete(response.data)
         }
         fetchData()
-    }, [numberOfDataToSkip, setComicsData, favorisData])
+    }, [numberOfDataToSkip, setComicsData, favorisData, setAutoComplete])
 
     return (isLoading ? <div className='back'><div className='ring'><span></span></div> <span className='load'>loading</span></div> :
         <div className='Personnages'>
