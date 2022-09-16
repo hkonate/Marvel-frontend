@@ -1,5 +1,8 @@
 import axios from "axios"
+import Splashscreen from "../components/Splashscreen"
+
 import { useState, useEffect } from "react"
+
 const Favoris = ({ setNotFavoris, setDisplay }) => {
     const [data, setData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
@@ -23,7 +26,7 @@ const Favoris = ({ setNotFavoris, setDisplay }) => {
     }, [data])
 
     let response;
-    return (isLoading ? <div className='back'><div className='ring'><span></span></div> <span className='load'>loading</span></div> : data.length < 1 ? <div className="no-favoris">NO FAVORIS</div> :
+    return (isLoading ? <Splashscreen /> : data.length < 1 ? <div className="no-favoris">NO FAVORIS</div> :
         <div className="Personnages">
             {
                 data.map((favoris, index) => {

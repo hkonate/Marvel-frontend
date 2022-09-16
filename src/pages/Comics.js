@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import Main from '../components/Main';
 import Pagination from '../components/Pagination';
+import Splashscreen from '../components/Splashscreen';
 
 
 const Comics = ({ search, comicsData, setComicsData, favorisData, setFavorisData, setAutoComplete, setNotFavoris }) => {
@@ -21,7 +22,7 @@ const Comics = ({ search, comicsData, setComicsData, favorisData, setFavorisData
         fetchData()
     }, [numberOfDataToSkip, setComicsData, favorisData, setAutoComplete])
 
-    return (isLoading ? <div className='back'><div className='ring'><span></span></div> <span className='load'>loading</span></div> :
+    return (isLoading ? <Splashscreen /> :
         <div className='Personnages'>
             <Main search={search} data={comicsData} titleOrName={titleOrName} favorisData={favorisData} setFavorisData={setFavorisData} />
             <Pagination data={comicsData} numberOfDataToSkip={numberOfDataToSkip} setNumberOfDataToSkip={setNumberOfDataToSkip} />
