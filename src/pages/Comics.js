@@ -25,7 +25,7 @@ const Comics = ({ search, comicsData, setComicsData, favorisData, setFavorisData
     return (isLoading ? <Splashscreen /> :
         <div className='Personnages'>
             <Main search={search} data={comicsData} titleOrName={titleOrName} favorisData={favorisData} setFavorisData={setFavorisData} />
-            <Pagination data={comicsData} numberOfDataToSkip={numberOfDataToSkip} setNumberOfDataToSkip={setNumberOfDataToSkip} />
+            <Pagination data={comicsData} numberOfDataToSkip={numberOfDataToSkip} setNumberOfDataToSkip={setNumberOfDataToSkip} setIsLoading={setIsLoading} />
         </div >)
 }
 export default Comics
