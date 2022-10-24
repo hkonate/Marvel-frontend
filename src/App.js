@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState } from "react"
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -22,6 +22,7 @@ function App() {
   const [notFavoris, setNotFavoris] = useState(false)
   const [favorisData, setFavorisData] = useState([])
   const [display, setDisplay] = useState(false)
+  const [hidePages, setHidePages] = useState([false, false, false])
 
 
   return (
@@ -33,7 +34,9 @@ function App() {
         notFavoris={notFavoris}
         display={display}
         setDisplay={setDisplay}
-        favorisData={favorisData} />
+        favorisData={favorisData}
+        hidePages={hidePages}
+        setHidePages={setHidePages} />
       <Routes>
         <Route
           path='/'
@@ -46,6 +49,8 @@ function App() {
               search={search}
               favorisData={favorisData}
               setFavorisData={setFavorisData}
+              hidePages={hidePages}
+              setHidePages={setHidePages}
             />} />
         <Route
           path='/comics'
@@ -57,7 +62,9 @@ function App() {
               favorisData={favorisData}
               setFavorisData={setFavorisData}
               setAutoComplete={setAutoComplete}
-              setNotFavoris={setNotFavoris} />} />
+              setNotFavoris={setNotFavoris}
+              hidePages={hidePages}
+              setHidePages={setHidePages} />} />
         <Route
           path='/favoris'
           element={
@@ -68,7 +75,9 @@ function App() {
               comicsData={comicsData}
               setAutoComplete={setAutoComplete}
               setNotFavoris={setNotFavoris}
-              setDisplay={setDisplay} />} />
+              setDisplay={setDisplay}
+              hidePages={hidePages}
+              setHidePages={setHidePages} />} />
       </Routes>
     </Router>
   );

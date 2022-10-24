@@ -3,7 +3,7 @@ import { useRef, useEffect } from 'react';
 import logo from '../img/Marvel_Logo.svg.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Header = ({ search, setSearch, autoComplete, display, notFavoris, setDisplay, favorisData }) => {
+const Header = ({ search, setSearch, autoComplete, display, notFavoris, setDisplay, favorisData, hidePages }) => {
     const refOne = useRef(null)
 
 
@@ -20,14 +20,13 @@ const Header = ({ search, setSearch, autoComplete, display, notFavoris, setDispl
             setDisplay(false)
         }
     }
-    console.log(autoComplete);
+
     return <div className="Header">
         <nav>
             <div className="header-container">
                 <div className='logo-header'>
                     <div id='logo' className="logo">
                         <Link to="/"> <img src={logo} alt="lolgo" /></Link>
-
                     </div>
                     <div className='bar-nav'>
                         {/* disabled inputbar if its on favoris page */}
@@ -72,9 +71,9 @@ const Header = ({ search, setSearch, autoComplete, display, notFavoris, setDispl
                     </div>
                 </div>
                 <div className='nav'>
-                    <Link to="/"><span>personages</span></Link>
-                    <Link to="/comics"><span>comics</span></Link>
-                    <Link to="/favoris"><span>favoris</span></Link>
+                    <Link style={{ display: hidePages[0] === true ? "none" : 'initial' }} to="/"><span>personages</span></Link>
+                    <Link style={{ display: hidePages[1] === true ? "none" : 'initial' }} to="/comics"><span>comics</span></Link>
+                    <Link style={{ display: hidePages[2] === true ? "none" : 'initial' }} to="/favoris"><span>favoris</span></Link>
                 </div>
             </div>
         </nav>
