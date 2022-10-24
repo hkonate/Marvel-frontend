@@ -53,9 +53,8 @@ const Favoris = ({ setNotFavoris, setDisplay, setHidePages, hidePages }) => {
                 }
             </div>
             <div className='bot-nav'>
-                <Link style={{ display: hidePages[0] === true ? "none" : 'block' }} to="/"><span>personages</span></Link>
-                <Link style={{ display: hidePages[1] === true ? "none" : 'block' }} to="/comics"><span>comics</span></Link>
-                <Link style={{ display: hidePages[2] === true ? "none" : 'block' }} to="/favoris"><span>favoris</span></Link>
+                <Link style={{ display: 'block' }} to="/"><span>personages</span></Link>
+                <Link style={{ display: 'block' }} to="/comics"><span>comics</span></Link>
             </div>
         </>)
 }
