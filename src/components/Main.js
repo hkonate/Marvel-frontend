@@ -12,7 +12,6 @@ const Main = ({ data, search, titleOrName, favorisData, setFavorisData }) => {
       );
       if (response.data) {
         setFavorisData(response.data.userFavoris);
-        console.log(response.data);
       }
     };
     fecth();
