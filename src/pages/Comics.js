@@ -1,34 +1,53 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Main from "../components/Main";
+import Splashscreen from "../components/Splashscreen";
 
-import { useEffect, useState } from 'react';
-import axios from 'axios'
+const Comics = ({
+  search,
+  comicsData,
+  setComicsData,
+  favorisData,
+  setFavorisData,
+  setAutoComplete,
+  setNotFavoris,
+  setHidePages,
+}) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const titleOrName = "title";
 
-import Main from '../components/Main';
-import Pagination from '../components/Pagination';
-import Splashscreen from '../components/Splashscreen';
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(
+        `https://marvel-backend-production.up.railway.app/comics`
+      );
+      setComicsData(response.data);
+      setIsLoading(false);
+      setAutoComplete(response.data);
+      setHidePages([false, true, false]);
+      setNotFavoris(true);
+    };
+    fetchData();
+  }, [
+    setComicsData,
+    favorisData,
+    setAutoComplete,
+    setHidePages,
+    setNotFavoris,
+  ]);
 
-
-const Comics = ({ search, comicsData, setComicsData, favorisData, setFavorisData, setAutoComplete, setNotFavoris, setHidePages, hidePages }) => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [numberOfDataToSkip, setNumberOfDataToSkip] = useState(0)
-    const titleOrName = "title"
-
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`https://app-marvel-react.herokuapp.com/comics?skip=${numberOfDataToSkip}`);
-            setComicsData(response.data);
-            setIsLoading(false)
-            setAutoComplete(response.data)
-            setHidePages([false, true, false])
-            setNotFavoris(true)
-        }
-        fetchData()
-    }, [numberOfDataToSkip, setComicsData, favorisData, setAutoComplete, setHidePages, setNotFavoris])
-
-    return (isLoading ? <Splashscreen /> :
-        <div className='Personnages'>
-            <Main search={search} data={comicsData} titleOrName={titleOrName} favorisData={favorisData} setFavorisData={setFavorisData} />
-            <Pagination data={comicsData} numberOfDataToSkip={numberOfDataToSkip} setNumberOfDataToSkip={setNumberOfDataToSkip} setIsLoading={setIsLoading} hidePages={hidePages} />
-        </div >)
-}
-export default Comics
+  return isLoading ? (
+    <Splashscreen />
+  ) : (
+    <div className="Personnages">
+      <Main
+        search={search}
+        data={comicsData}
+        titleOrName={titleOrName}
+        favorisData={favorisData}
+        setFavorisData={setFavorisData}
+      />
+    </div>
+  );
+};
+export default Comics;
