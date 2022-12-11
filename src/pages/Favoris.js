@@ -31,16 +31,6 @@ const Favoris = ({ setNotFavoris, setDisplay, setHidePages }) => {
     }
   }, [setDisplay, setHidePages, setNotFavoris]);
 
-  const handleDeleteFav = async (index) => {
-    await axios.delete(
-      `https://marvel-backend-production.up.railway.app/favoris/delete/${data[index]._id}`
-    );
-    response = await axios.get(
-      "https://marvel-backend-production.up.railway.app/favoris"
-    );
-    setData(response.data.userFavoris);
-  };
-
   let response;
   return isLoading ? (
     <Splashscreen />
@@ -54,7 +44,15 @@ const Favoris = ({ setNotFavoris, setDisplay, setHidePages }) => {
             <div
               className="character"
               key={index}
-              onClick={handleDeleteFav(index)}
+              onClick={async () => {
+                await axios.delete(
+                  `https://marvel-backend-production.up.railway.app/favoris/delete/${data[index]._id}`
+                );
+                response = await axios.get(
+                  "https://marvel-backend-production.up.railway.app/favoris"
+                );
+                setData(response.data.userFavoris);
+              }}
             >
               <img
                 className="gold"

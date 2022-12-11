@@ -12,57 +12,11 @@ const Main = ({ data, search, titleOrName, favorisData, setFavorisData }) => {
       );
       if (response.data) {
         setFavorisData(response.data.userFavoris);
+        console.log(response.data);
       }
     };
     fecth();
-  }, [setFavorisData]);
-
-  const handleFavoris = async (index) => {
-    const alreadyInFavoris = favorisData.findIndex(
-      (favoris) => favoris.code === data.results[index]._id
-    );
-    if (alreadyInFavoris === -1) {
-      if (!data.results[index].description) {
-        await axios.post(
-          "https://marvel-backend-production.up.railway.app/favoris/create",
-          {
-            name: data.results[index][titleOrName],
-            url_secure: `${data.results[index].thumbnail.path}.${data.results[index].thumbnail.extension}`,
-            code: data.results[index]._id,
-          }
-        );
-        response = await axios.get(
-          "https://marvel-backend-production.up.railway.app/favoris"
-        );
-        setFavorisData(response.data.userFavoris);
-      } else {
-        await axios.post(
-          "https://marvel-backend-production.up.railway.app/favoris/create",
-          {
-            name: data.results[index][titleOrName],
-            url_secure: `${data.results[index].thumbnail.path}.${data.results[index].thumbnail.extension}`,
-            description: data.results[index].description,
-            code: data.results[index]._id,
-          }
-        );
-        response = await axios.get(
-          "https://marvel-backend-production.up.railway.app/favoris"
-        );
-      }
-      response = await axios.get(
-        "https://marvel-backend-production.up.railway.app/favoris"
-      );
-      setFavorisData(response.data.userFavoris);
-    } else {
-      await axios.delete(
-        `https://marvel-backend-production.up.railway.app/favoris/delete/${favorisData[alreadyInFavoris]._id}`
-      );
-      response = await axios.get(
-        "https://marvel-backend-production.up.railway.app/favoris"
-      );
-      setFavorisData(response.data.userFavoris);
-    }
-  };
+  }, []);
 
   return (
     <>
@@ -72,7 +26,52 @@ const Main = ({ data, search, titleOrName, favorisData, setFavorisData }) => {
             <div
               className="character"
               key={index}
-              onClick={handleFavoris(index)}
+              onClick={async () => {
+                const alreadyInFavoris = favorisData.findIndex(
+                  (favoris) => favoris.code === data.results[index]._id
+                );
+                if (alreadyInFavoris === -1) {
+                  if (!data.results[index].description) {
+                    await axios.post(
+                      "https://marvel-backend-production.up.railway.app/favoris/create",
+                      {
+                        name: data.results[index][titleOrName],
+                        url_secure: `${data.results[index].thumbnail.path}.${data.results[index].thumbnail.extension}`,
+                        code: data.results[index]._id,
+                      }
+                    );
+                    response = await axios.get(
+                      "https://marvel-backend-production.up.railway.app/favoris"
+                    );
+                    setFavorisData(response.data.userFavoris);
+                  } else {
+                    await axios.post(
+                      "https://marvel-backend-production.up.railway.app/favoris/create",
+                      {
+                        name: data.results[index][titleOrName],
+                        url_secure: `${data.results[index].thumbnail.path}.${data.results[index].thumbnail.extension}`,
+                        description: data.results[index].description,
+                        code: data.results[index]._id,
+                      }
+                    );
+                    response = await axios.get(
+                      "https://marvel-backend-production.up.railway.app/favoris"
+                    );
+                  }
+                  response = await axios.get(
+                    "https://marvel-backend-production.up.railway.app/favoris"
+                  );
+                  setFavorisData(response.data.userFavoris);
+                } else {
+                  await axios.delete(
+                    `https://marvel-backend-production.up.railway.app/favoris/delete/${favorisData[alreadyInFavoris]._id}`
+                  );
+                  response = await axios.get(
+                    "https://marvel-backend-production.up.railway.app/favoris"
+                  );
+                  setFavorisData(response.data.userFavoris);
+                }
+              }}
             >
               <img
                 className={
