@@ -16,7 +16,7 @@ const Main = ({ data, search, titleOrName, favorisData, setFavorisData }) => {
       }
     };
     fecth();
-  }, []);
+  }, [setFavorisData]);
 
   return (
     <>
