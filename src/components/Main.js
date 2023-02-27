@@ -8,7 +8,7 @@ const Main = ({ data, search, titleOrName, favorisData, setFavorisData }) => {
   useEffect(() => {
     const fecth = async () => {
       const response = await axios.get(
-        "https://marvel-backend-production.up.railway.app/favoris"
+        "https://marvel-backend-production-b96a.up.railway.app/favoris"
       );
       if (response.data) {
         setFavorisData(response.data.userFavoris);
@@ -33,7 +33,7 @@ const Main = ({ data, search, titleOrName, favorisData, setFavorisData }) => {
                 if (alreadyInFavoris === -1) {
                   if (!data.results[index].description) {
                     await axios.post(
-                      "https://marvel-backend-production.up.railway.app/favoris/create",
+                      "https://marvel-backend-production-b96a.up.railway.app/favoris/create",
                       {
                         name: data.results[index][titleOrName],
                         url_secure: `${data.results[index].thumbnail.path}.${data.results[index].thumbnail.extension}`,
@@ -41,12 +41,12 @@ const Main = ({ data, search, titleOrName, favorisData, setFavorisData }) => {
                       }
                     );
                     response = await axios.get(
-                      "https://marvel-backend-production.up.railway.app/favoris"
+                      "https://marvel-backend-production-b96a.up.railway.app/favoris"
                     );
                     setFavorisData(response.data.userFavoris);
                   } else {
                     await axios.post(
-                      "https://marvel-backend-production.up.railway.app/favoris/create",
+                      "https://marvel-backend-production-b96a.up.railway.app/favoris/create",
                       {
                         name: data.results[index][titleOrName],
                         url_secure: `${data.results[index].thumbnail.path}.${data.results[index].thumbnail.extension}`,
@@ -55,19 +55,19 @@ const Main = ({ data, search, titleOrName, favorisData, setFavorisData }) => {
                       }
                     );
                     response = await axios.get(
-                      "https://marvel-backend-production.up.railway.app/favoris"
+                      "https://marvel-backend-production-b96a.up.railway.app/favoris"
                     );
                   }
                   response = await axios.get(
-                    "https://marvel-backend-production.up.railway.app/favoris"
+                    "https://marvel-backend-production-b96a.up.railway.app/favoris"
                   );
                   setFavorisData(response.data.userFavoris);
                 } else {
                   await axios.delete(
-                    `https://marvel-backend-production.up.railway.app/favoris/delete/${favorisData[alreadyInFavoris]._id}`
+                    `https://marvel-backend-production-b96a.up.railway.app/favoris/delete/${favorisData[alreadyInFavoris]._id}`
                   );
                   response = await axios.get(
-                    "https://marvel-backend-production.up.railway.app/favoris"
+                    "https://marvel-backend-production-b96a.up.railway.app/favoris"
                   );
                   setFavorisData(response.data.userFavoris);
                 }

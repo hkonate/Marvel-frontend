@@ -13,7 +13,7 @@ const Favoris = ({ setNotFavoris, setDisplay, setHidePages }) => {
     try {
       const fecthData = async () => {
         const response = await axios.get(
-          "https://marvel-backend-production.up.railway.app/favoris"
+          "https://marvel-backend-production-b96a.up.railway.app/favoris"
         );
         if (response.data) {
           setData(response.data.userFavoris);
@@ -46,10 +46,10 @@ const Favoris = ({ setNotFavoris, setDisplay, setHidePages }) => {
               key={index}
               onClick={async () => {
                 await axios.delete(
-                  `https://marvel-backend-production.up.railway.app/favoris/delete/${data[index]._id}`
+                  `https://marvel-backend-production-b96a.up.railway.app/favoris/delete/${data[index]._id}`
                 );
                 response = await axios.get(
-                  "https://marvel-backend-production.up.railway.app/favoris"
+                  "https://marvel-backend-production-b96a.up.railway.app/favoris"
                 );
                 setData(response.data.userFavoris);
               }}
