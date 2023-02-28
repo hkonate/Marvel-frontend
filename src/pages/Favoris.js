@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
-const Favoris = ({ setNotFavoris, setDisplay, setHidePages }) => {
+const Favoris = ({ setNotFavoris, setHidePages }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,18 +23,24 @@ const Favoris = ({ setNotFavoris, setDisplay, setHidePages }) => {
         setNotFavoris(false);
         setHidePages([false, false, true]);
         // Don't show autocomplete
-        setDisplay(false);
       };
       fecthData();
     } catch (error) {
       console.log(error.response.data);
     }
-  }, [setDisplay, setHidePages, setNotFavoris]);
+  }, [setHidePages, setNotFavoris]);
 
-  let response;
+  const HandleDeleteFav = async (index) => {
+    const response = await axios.delete(
+      `https://marvel-backend-production-b96a.up.railway.app/favoris/delete/${data[index]._id}`
+    );
+    console.log(response.data);
+    setData(response.data.userFavoris);
+  };
+
   return isLoading ? (
     <Splashscreen />
-  ) : data.length < 1 ? (
+  ) : data?.length < 1 ? (
     <div className="no-favoris">NO FAVORIS</div>
   ) : (
     <>
@@ -44,15 +50,7 @@ const Favoris = ({ setNotFavoris, setDisplay, setHidePages }) => {
             <div
               className="character"
               key={index}
-              onClick={async () => {
-                await axios.delete(
-                  `https://marvel-backend-production-b96a.up.railway.app/favoris/delete/${data[index]._id}`
-                );
-                response = await axios.get(
-                  "https://marvel-backend-production-b96a.up.railway.app/favoris"
-                );
-                setData(response.data.userFavoris);
-              }}
+              onClick={HandleDeleteFav(index)}
             >
               <img
                 className="gold"
