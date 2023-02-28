@@ -1,8 +1,8 @@
 import axios from "axios";
 import Splashscreen from "../components/Splashscreen";
+import NoImage from "../img/no image.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-
 import { useState, useEffect } from "react";
 
 const Favoris = ({ setNotFavoris, setHidePages }) => {
@@ -50,11 +50,18 @@ const Favoris = ({ setNotFavoris, setHidePages }) => {
             <div
               className="character"
               key={index}
-              onClick={HandleDeleteFav(index)}
+              onClick={() => {
+                HandleDeleteFav(index);
+              }}
             >
               <img
                 className="gold"
-                src={favoris.url_secure}
+                src={
+                  favoris.url_secure !==
+                  "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+                    ? favoris.url_secure
+                    : NoImage
+                }
                 alt="marvel's favoris"
               />
               <span>{favoris.name}</span>
