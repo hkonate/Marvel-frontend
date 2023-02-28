@@ -11,6 +11,8 @@ const Personnages = ({
   setData,
   setAutoComplete,
   setHidePages,
+  enter,
+  setEnter,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const titleOrName = "name";
@@ -27,9 +29,10 @@ const Personnages = ({
         setNotFavoris(true);
       }
       setHidePages([true, false, false]);
+      setEnter(false);
     };
     fecthData();
-  }, [setAutoComplete, setData, setHidePages, setNotFavoris]);
+  }, [setAutoComplete, setData, setHidePages, setNotFavoris, setEnter]);
   return isLoading ? (
     <div className="back">
       <div className="ring">
@@ -45,6 +48,7 @@ const Personnages = ({
         titleOrName={titleOrName}
         favorisData={favorisData}
         setFavorisData={setFavorisData}
+        enter={enter}
       />
     </div>
   );

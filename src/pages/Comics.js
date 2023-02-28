@@ -12,6 +12,8 @@ const Comics = ({
   setAutoComplete,
   setNotFavoris,
   setHidePages,
+  enter,
+  setEnter,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const titleOrName = "title";
@@ -26,14 +28,16 @@ const Comics = ({
       setAutoComplete(response.data);
       setHidePages([false, true, false]);
       setNotFavoris(true);
+      setEnter(false);
     };
     fetchData();
   }, [
-    setComicsData,
     favorisData,
     setAutoComplete,
     setHidePages,
     setNotFavoris,
+    setEnter,
+    setComicsData,
   ]);
 
   return isLoading ? (
@@ -46,6 +50,7 @@ const Comics = ({
         titleOrName={titleOrName}
         favorisData={favorisData}
         setFavorisData={setFavorisData}
+        enter={enter}
       />
     </div>
   );

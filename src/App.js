@@ -1,29 +1,26 @@
-import './css/App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState } from "react"
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBoltLightning } from '@fortawesome/free-solid-svg-icons';
+import "./css/App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faBoltLightning } from "@fortawesome/free-solid-svg-icons";
 
-
-
-import Header from './components/Header';
-import Personnages from './pages/Personnages'
-import Comics from './pages/Comics'
-import Favoris from './pages/Favoris'
+import Header from "./components/Header";
+import Personnages from "./pages/Personnages";
+import Comics from "./pages/Comics";
+import Favoris from "./pages/Favoris";
 
 library.add(faBoltLightning);
 
-
 function App() {
-  const [data, setData] = useState(null)
-  const [comicsData, setComicsData] = useState(null)
-  const [search, setSearch] = useState("")
-  const [autoComplete, setAutoComplete] = useState([])
-  const [notFavoris, setNotFavoris] = useState(false)
-  const [favorisData, setFavorisData] = useState([])
-  const [display, setDisplay] = useState(false)
-  const [hidePages, setHidePages] = useState([false, false, false])
-
+  const [data, setData] = useState(null);
+  const [comicsData, setComicsData] = useState(null);
+  const [search, setSearch] = useState("");
+  const [autoComplete, setAutoComplete] = useState([]);
+  const [notFavoris, setNotFavoris] = useState(false);
+  const [favorisData, setFavorisData] = useState([]);
+  const [display, setDisplay] = useState(false);
+  const [enter, setEnter] = useState(false);
+  const [hidePages, setHidePages] = useState([false, false, false]);
 
   return (
     <Router>
@@ -33,13 +30,16 @@ function App() {
         autoComplete={autoComplete}
         notFavoris={notFavoris}
         display={display}
+        setEnter={setEnter}
+        enter={enter}
         setDisplay={setDisplay}
         favorisData={favorisData}
         hidePages={hidePages}
-        setHidePages={setHidePages} />
+        setHidePages={setHidePages}
+      />
       <Routes>
         <Route
-          path='/'
+          path="/"
           element={
             <Personnages
               setNotFavoris={setNotFavoris}
@@ -51,9 +51,13 @@ function App() {
               setFavorisData={setFavorisData}
               hidePages={hidePages}
               setHidePages={setHidePages}
-            />} />
+              setEnter={setEnter}
+              enter={enter}
+            />
+          }
+        />
         <Route
-          path='/comics'
+          path="/comics"
           element={
             <Comics
               search={search}
@@ -64,9 +68,14 @@ function App() {
               setAutoComplete={setAutoComplete}
               setNotFavoris={setNotFavoris}
               hidePages={hidePages}
-              setHidePages={setHidePages} />} />
+              setHidePages={setHidePages}
+              setEnter={setEnter}
+              enter={enter}
+            />
+          }
+        />
         <Route
-          path='/favoris'
+          path="/favoris"
           element={
             <Favoris
               favorisData={favorisData}
@@ -75,9 +84,11 @@ function App() {
               comicsData={comicsData}
               setAutoComplete={setAutoComplete}
               setNotFavoris={setNotFavoris}
-              setDisplay={setDisplay}
               hidePages={hidePages}
-              setHidePages={setHidePages} />} />
+              setHidePages={setHidePages}
+            />
+          }
+        />
       </Routes>
     </Router>
   );
