@@ -21,7 +21,7 @@ const Comics = ({
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `https://marvel-backend-production-b96a.up.railway.app/comics`
+        `https://marvel-backend-production.up.railway.app/comics`
       );
       setComicsData(response.data);
       setIsLoading(false);

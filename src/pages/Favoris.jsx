@@ -13,7 +13,7 @@ const Favoris = ({ setNotFavoris, setHidePages }) => {
     try {
       const fecthData = async () => {
         const response = await axios.get(
-          "https://marvel-backend-production-b96a.up.railway.app/favoris"
+          "https://marvel-backend-production.up.railway.app/favoris"
         );
         if (response.data) {
           setData(response.data.userFavoris);
@@ -32,7 +32,7 @@ const Favoris = ({ setNotFavoris, setHidePages }) => {
 
   const HandleDeleteFav = async (index) => {
     const response = await axios.delete(
-      `https://marvel-backend-production-b96a.up.railway.app/favoris/delete/${data[index]._id}`
+      `https://marvel-backend-production.up.railway.app/favoris/delete/${data[index]._id}`
     );
     console.log(response.data);
     setData(response.data.userFavoris);

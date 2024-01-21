@@ -20,7 +20,7 @@ const Personnages = ({
   useEffect(() => {
     const fecthData = async () => {
       const response = await axios.get(
-        `https://marvel-backend-production-b96a.up.railway.app/characters`
+        `https://marvel-backend-production.up.railway.app/characters`
       );
       if (response.data) {
         setData(response.data);

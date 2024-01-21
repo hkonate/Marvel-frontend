@@ -16,7 +16,7 @@ const Main = ({
     const fecth = async () => {
       try {
         const response = await axios.get(
-          "https://marvel-backend-production-b96a.up.railway.app/favoris"
+          "https://marvel-backend-production.up.railway.app/favoris"
         );
         setFavorisData(response.data.userFavoris);
       } catch (error) {}
@@ -31,7 +31,7 @@ const Main = ({
     try {
       if (alreadyInFavoris === -1) {
         response = await axios.post(
-          "https://marvel-backend-production-b96a.up.railway.app/favoris/create",
+          "https://marvel-backend-production.up.railway.app/favoris/create",
           {
             name: data.results[index][titleOrName],
             url_secure: `${data.results[index].thumbnail.path}.${data.results[index].thumbnail.extension}`,
@@ -43,7 +43,7 @@ const Main = ({
         );
       } else {
         response = await axios.delete(
-          `https://marvel-backend-production-b96a.up.railway.app/favoris/delete/${favorisData[alreadyInFavoris]._id}`
+          `https://marvel-backend-production.up.railway.app/favoris/delete/${favorisData[alreadyInFavoris]._id}`
         );
       }
       setFavorisData(response.data.userFavoris);
